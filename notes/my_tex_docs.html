@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<title>How do i use latex</title>
+</head>
+
+<body>
+
+<h1>1. What do i use</h1>
+Linux Mint 19.1 Tessa (cat /etc/os-release)<br>
+Russian and English languages
+
+<h1>2. Installation</h1>
+sudo apt install texlive<br>
+sudo apt install texlive-latex-extra<br>
+sudo apt install texlive-lang-cyrillic (for Russian language)<br>
+sudo apt install texlive-bibtex-extra (for bibtex)<br>
+<h2>Other packages</h2>
+xstring from CTAN (for bibtex)
+
+<h1>3. Extra Packages Installation</h1>
+  <h2>3.1. Using tlmgr</h2>
+    <h3>Init</h3>
+    cd ~<br>
+    tlmgr init-usertree<br>
+    sudo apt install xzdec
+    <h3>Installation</h3>
+    tlmgr install PACKAGE_NAME
+  <h2>3.2. Using CTAN</h2>
+  For the package xstring: put xstring.sty, xstring.tex into /home/anton/texmf/tex/latex/xstring
+<br>
+
+<h1>3. Make pdf</h1>
+Write into shell script and run as ./SCRIPT_NAME.sh FILE_NAME<br>
+#!/bin/bash<br>
+<br>
+if [ $# -gt 0 ]; then<br>
+&nbsp&nbsp&nbsp&nbspFILE_NAME=$1<br>
+else<br>
+&nbsp&nbsp&nbsp&nbspFILE_NAME=autoref<br>
+fi<br>
+<br>
+pdflatex $FILE_NAME'.tex'<br>
+bibtex $FILE_NAME<br>
+pdflatex $FILE_NAME'.tex'<br>
+pdflatex $FILE_NAME'.tex'<br>
+<br>
+rm $FILE_NAME'.aux'<br>
+rm $FILE_NAME'.bbl'<br>
+rm $FILE_NAME'.blg'<br>
+rm $FILE_NAME'.log'<br>
+rm $FILE_NAME'.run.xml'<br>
+rm $FILE_NAME'-blx.bib'<br>
+rm $FILE_NAME'.toc'<br>
+rm 'texput.log'<br>
+
+</body>
+
+</html>
